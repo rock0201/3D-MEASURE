@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+   <FileVersion major="1" minor="6" />
+   <Project>
+      <Option title="hs_highapi" />
+      <Option makefile_is_custom="1" />
+      <Option compiler="gcc" />
+      <Option virtualFolders="CMake Files\;" />
+      <Build>
+      <Target title="all">
+         <Option working_dir="/home/rock/measure1/libhs_highapi-build" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/rock/measure1/libhs_highapi-build/Makefile&quot;  VERBOSE=1 all" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/rock/measure1/libhs_highapi-build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/rock/measure1/libhs_highapi-build/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/rock/measure1/libhs_highapi-build/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="edit_cache">
+         <Option working_dir="/home/rock/measure1/libhs_highapi-build" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/rock/measure1/libhs_highapi-build/Makefile&quot;  VERBOSE=1 edit_cache" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/rock/measure1/libhs_highapi-build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/rock/measure1/libhs_highapi-build/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/rock/measure1/libhs_highapi-build/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="rebuild_cache">
+         <Option working_dir="/home/rock/measure1/libhs_highapi-build" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/rock/measure1/libhs_highapi-build/Makefile&quot;  VERBOSE=1 rebuild_cache" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/rock/measure1/libhs_highapi-build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/rock/measure1/libhs_highapi-build/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/rock/measure1/libhs_highapi-build/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="hs_highapi">
+         <Option output="/home/rock/measure1/libhs_highapi/lib/libhs_highapi.so" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/home/rock/measure1/libhs_highapi-build" />
+         <Option object_output="./" />
+         <Option type="3" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add directory="/home/rock/measure1/libhs_highapi/./include" />
+            <Add directory="/home/rock/measure1/libhs_highapi/./src" />
+            <Add directory="/home/rock/slamcode/SungemSDK-Cppfujian/SungemSDK/include" />
+            <Add directory="/usr/include" />
+            <Add directory="/usr/include/c++/5" />
+            <Add directory="/usr/include/c++/5/backward" />
+            <Add directory="/usr/include/x86_64-linux-gnu" />
+            <Add directory="/usr/include/x86_64-linux-gnu/c++/5" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed" />
+            <Add directory="/usr/local/include" />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/rock/measure1/libhs_highapi-build/Makefile&quot;  VERBOSE=1 hs_highapi" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/rock/measure1/libhs_highapi-build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/rock/measure1/libhs_highapi-build/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/rock/measure1/libhs_highapi-build/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="hs_highapi/fast">
+         <Option output="/home/rock/measure1/libhs_highapi/lib/libhs_highapi.so" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/home/rock/measure1/libhs_highapi-build" />
+         <Option object_output="./" />
+         <Option type="3" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add directory="/home/rock/measure1/libhs_highapi/./include" />
+            <Add directory="/home/rock/measure1/libhs_highapi/./src" />
+            <Add directory="/home/rock/slamcode/SungemSDK-Cppfujian/SungemSDK/include" />
+            <Add directory="/usr/include" />
+            <Add directory="/usr/include/c++/5" />
+            <Add directory="/usr/include/c++/5/backward" />
+            <Add directory="/usr/include/x86_64-linux-gnu" />
+            <Add directory="/usr/include/x86_64-linux-gnu/c++/5" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed" />
+            <Add directory="/usr/local/include" />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/rock/measure1/libhs_highapi-build/Makefile&quot;  VERBOSE=1 hs_highapi/fast" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/rock/measure1/libhs_highapi-build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/rock/measure1/libhs_highapi-build/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/rock/measure1/libhs_highapi-build/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      </Build>
+      <Unit filename="/home/rock/measure1/libhs_highapi/src/device.cpp">
+         <Option target="hs_highapi"/>
+      </Unit>
+      <Unit filename="/home/rock/measure1/libhs_highapi/src/exception.cpp">
+         <Option target="hs_highapi"/>
+      </Unit>
+      <Unit filename="/home/rock/measure1/libhs_highapi/src/exception_util.cpp">
+         <Option target="hs_highapi"/>
+      </Unit>
+      <Unit filename="/home/rock/measure1/libhs_highapi/src/graph.cpp">
+         <Option target="hs_highapi"/>
+      </Unit>
+      <Unit filename="/home/rock/measure1/libhs_highapi/src/hsapi.cpp">
+         <Option target="hs_highapi"/>
+      </Unit>
+      <Unit filename="/home/rock/measure1/libhs_highapi/src/result.cpp">
+         <Option target="hs_highapi"/>
+      </Unit>
+      <Unit filename="/home/rock/measure1/libhs_highapi/src/tensor.cpp">
+         <Option target="hs_highapi"/>
+      </Unit>
+      <Unit filename="/home/rock/measure1/libhs_highapi/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\" />
+      </Unit>
+   </Project>
+</CodeBlocks_project_file>

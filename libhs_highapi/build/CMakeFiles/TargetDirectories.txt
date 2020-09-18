@@ -1,0 +1,3 @@
+/home/lhy/SungemSDK-Cpp/libhs_highapi/build/CMakeFiles/rebuild_cache.dir
+/home/lhy/SungemSDK-Cpp/libhs_highapi/build/CMakeFiles/hs_highapi.dir
+/home/lhy/SungemSDK-Cpp/libhs_highapi/build/CMakeFiles/edit_cache.dir
