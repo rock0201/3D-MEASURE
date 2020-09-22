@@ -18,22 +18,23 @@ MainWindow::MainWindow(QWidget *parent)
     displaySize.width = 720;//展示的左右图的大小
     displaySize.height = 405;
 
-    imgModel = imread("../modelImg1.png");//
+    imgModel = imread("../lable/modelImg1.png");//
     QImage qImgModel = Mat2QImage(imgModel);
     ui->modelIMg->setPixmap(QPixmap::fromImage(qImgModel));
     setMode();
 
-    ui->next->setIcon(QIcon("../right.png"));
-    ui->last->setIcon(QIcon("../left.png"));
-    ui->photo->setIcon(QIcon("../photo.png"));
-    ui->recalibrate->setIcon(QIcon("../cail.png"));
-    ui->calibrate->setIcon(QIcon("../cailse.png"));
-    ui->select->setIcon(QIcon("../img.png"));
-    ui->angle_Button->setIcon(QIcon("../angle.png"));
-    ui->model_button->setIcon(QIcon("../mod.png"));
+    ui->next->setIcon(QIcon("../lable/right.png"));
+    ui->last->setIcon(QIcon("../lable/left.png"));
+    ui->photo->setIcon(QIcon("../lable/photo.png"));
+    ui->recalibrate->setIcon(QIcon("../lable/cail.png"));
+    ui->calibrate->setIcon(QIcon("../lable/cailse.png"));
+    ui->select->setIcon(QIcon("../lable/img.png"));
+    ui->angle_Button->setIcon(QIcon("../lable/angle.png"));
+    ui->model_button->setIcon(QIcon("../lable/mod.png"));
+    ui->generate_button->setIcon(QIcon("../lable/generate.png"));
     //this->setStyleSheet("background-color:rgba(0,0,139,255)");
 
-    backGround = imread("../timg1.jpeg");
+    backGround = imread("../lable/timg1.jpeg");
     QImage qBack = Mat2QImage(backGround);
     QPalette pal;
     pal.setBrush(QPalette::Background,QBrush(QPixmap::fromImage(qBack)));
@@ -59,7 +60,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     // 模型视口
     modelView = new GLModelView(modelPoints, this);
-    modelView->setGeometry(0, 690, 640, 360);
+    modelView->setGeometry(300, 720, 640, 360);
+
+
+
 
 }
 
@@ -182,13 +186,49 @@ void MainWindow::measureModel(int sign, float x,float y){
             clearModeInfo();
             setModelInfo(NUM);
             Point3d modelPoint;
+            //if > 500 , then give scale
+            if(NUM==0&&points[0].z>500){
+                scale = points[0].z/500.0;
+            }
             modelPoint.x = points[0].x;
             modelPoint.y = points[0].y;
-            modelPoint.z = points[0].z;
+            modelPoint.z = points[0].z/scale;
+
             modelPoints.push_back(modelPoint);
+
+//            Point3d modelPoint;
+
+//            switch(NUM+1){
+//            case 7:
+//                modelPoint.x = 0.0 ;  modelPoint.y = 74.0 ; modelPoint.z = 500.0 ;
+//                modelPoints.push_back(modelPoint);break;
+//            case 6:
+//                modelPoint.x = 28.0 ;  modelPoint.y = 75.0 ; modelPoint.z = 480.0 ;
+//                modelPoints.push_back(modelPoint);break;
+//            case 5:
+//                modelPoint.x = 25.0 ;  modelPoint.y = 60.0 ; modelPoint.z = 490.0 ;
+//                modelPoints.push_back(modelPoint);break;
+//            case 4:
+//                modelPoint.x = -25.0 ;  modelPoint.y = 41.0 ; modelPoint.z = 460.0 ;
+//                modelPoints.push_back(modelPoint);break;
+//            case 3:
+//                modelPoint.x = -35.0 ;  modelPoint.y = 39.0 ; modelPoint.z = 480.0 ;
+//                modelPoints.push_back(modelPoint);break;
+//            case 2:
+//                modelPoint.x = 3.0 ;  modelPoint.y = 34.0 ; modelPoint.z = 500.0 ;
+//                modelPoints.push_back(modelPoint);break;
+//            case 1:
+//                modelPoint.x = 0.0 ;  modelPoint.y = 10.0 ; modelPoint.z = 500.0 ;
+//                modelPoints.push_back(modelPoint);break;
+//            default:
+//                break;
+//            }
+
+
+
             NUM++;
             //modelView->paintGL();
-            cout<<modelPoint.x<<" "<<modelPoint.y<<" "<<modelPoint.z<<endl;
+            cout<<modelPoint.x<<" "<<modelPoint.y<<" "<<modelPoint.z<<endl; //判断是否超过500 超过了就按比例缩小
             cout<<"这是模型的第"<<NUM<<"个点"<<endl;
             ISLEFT =false;
             ISRIGHT = false;
@@ -242,7 +282,8 @@ void MainWindow::measureAngle(int sign, float x, float y){
             caculateAngle(anglePoints);
             cout<<"角度测量完毕"<<endl;
             anglePoints.clear();
-            ui->angle_Button->setStyleSheet("background: rgb(255,255,255)");
+            ui->angle_Button->setStyleSheet("QPushButton{background-color: rgb(245,245,220);selection-color : rgb(225,255,255);border-radius:25px;}QPushButton:hover{background-color:rgb(0,128,128)}QPushButton:focus{outline:none;}");
+            setMode();
             ISANGLE = false;
             NUM = 0;
         }
@@ -278,6 +319,7 @@ void MainWindow::measureDistance(int sign, float x,float y){
             pt1_cam_3d.z = points[0].z;
             cout << "point projected from 3D(1): " << pt1_cam_3d << endl;
             ui->point1->setText("3Dpoint  (" + QString::number(pt1_cam_3d.x,'f',2) + "," + QString::number(pt1_cam_3d.y,'f',2) + "," + QString::number(pt1_cam_3d.z,'f',2) + ")");
+            //ui->point1->setText("3Dpoint  (" + QString::number(-20.12,'f',2) + "," + QString::number(120.85,'f',2) + "," + QString::number(1501.61,'f',2) + ")");
             ui->point1->adjustSize();
             NUM++;
         }else if(NUM==1){
@@ -287,6 +329,7 @@ void MainWindow::measureDistance(int sign, float x,float y){
             //cout << "point projected from 3D " << pt1_cam_3d << ", d=" << points[0].z << endl;
             cout << "point projected from 3D(2); " << pt2_cam_3d << endl;
             ui->point2->setText("3Dpoint  (" + QString::number(pt2_cam_3d.x,'f',2) + "," + QString::number(pt2_cam_3d.y,'f',2) + "," + QString::number(pt2_cam_3d.z,'f',2) + ")");
+            //ui->point2->setText("3Dpoint  (" + QString::number(-21.54,'f',2) + "," + QString::number(49.31,'f',2) + "," + QString::number(1499.31,'f',2) + ")");
             ui->point2->adjustSize();
             NUM++;
             if(NUM==2)
@@ -297,6 +340,7 @@ void MainWindow::measureDistance(int sign, float x,float y){
                 float d = sqrt(dx * dx + dy * dy + dz * dz );
                 cout << "d = " << d << endl;
                 ui->distance->setText(QString::number(d,'f',2) + "cm");
+               // ui->distance->setText(QString::number(70.92,'f',2) + "cm");
                 NUM = 0;
             }
         }
@@ -539,9 +583,10 @@ void MainWindow::on_select_clicked()
     std::cout << "---------------  Q ----------------- " << std::endl;
     std::cout << "Q " << std::endl << Q << std::endl;
 
-    imageL = cv::imread( fname + "/left" + (QString::number(imgNum)).toStdString() + ".jpg", 0);
-    imageR = cv::imread( fname + "/right" +(QString::number(imgNum)).toStdString() + ".jpg", 0);
+    imageL = cv::imread( fname + "/left" + (QString::number(imgNum)).toStdString() + ".jpg");
+    imageR = cv::imread( fname + "/right" +(QString::number(imgNum)).toStdString() + ".jpg");
 
+    //std::cout<<imageL.cols<<" "<<imageL.rows<<std::endl;
 
     cv::Mat rectifyImageL, rectifyImageR;
 
@@ -711,8 +756,8 @@ void MainWindow::on_last_clicked()
     else
     {
         imgNum--;
-        imageL = cv::imread( fname + "/left" + (QString::number(imgNum)).toStdString() + ".jpg", 0);
-        imageR = cv::imread( fname + "/right" +(QString::number(imgNum)).toStdString() + ".jpg", 0);
+        imageL = cv::imread( fname + "/left" + (QString::number(imgNum)).toStdString() + ".jpg");
+        imageR = cv::imread( fname + "/right" +(QString::number(imgNum)).toStdString() + ".jpg"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   );
         cv::resize(imageL, displayImgL,displaySize);
         cv::resize(imageR, displayImgR,displaySize);
         QImage disImage1=Mat2QImage(displayImgL);
@@ -738,8 +783,8 @@ void MainWindow::on_next_clicked()
     else
     {
         imgNum++;
-        imageL = cv::imread( fname + "/left" + (QString::number(imgNum)).toStdString() + ".jpg", 0);
-        imageR = cv::imread( fname + "/right" +(QString::number(imgNum)).toStdString() + ".jpg", 0);
+        imageL = cv::imread( fname + "/left" + (QString::number(imgNum)).toStdString() + ".jpg");
+        imageR = cv::imread( fname + "/right" +(QString::number(imgNum)).toStdString() + ".jpg");
 
         cv::Mat rectifyImageL, rectifyImageR;
 
@@ -822,6 +867,7 @@ void MainWindow::clearPoint()//  reset all mode
     pt1_cam_3d.y = 0.f;
     pt1_cam_3d.z = 0.f;
     ui->angle->setText("0 度");
+    scale = 1.0;
     setMode();
     clearModeInfo();
 
@@ -853,7 +899,8 @@ void MainWindow::on_angle_Button_clicked()
         ISMODEL = false;
         QMessageBox::warning(NULL, "提示", "请重新选择模式", QMessageBox::Yes);
     }
-    ISANGLE == true?ui->angle_Button->setStyleSheet("background: rgb(0,255,0)"):ui->angle_Button->setStyleSheet("background: rgb(255,255,255)");
+   // ISANGLE == true?ui->angle_Button->setStyleSheet("background: rgb(0,255,0)"):ui->angle_Button->setStyleSheet("background: rgb(255,255,255)");
+    ISANGLE == true?ui->angle_Button->setStyleSheet("QPushButton{background-color: rgb(0,128,128);border-radius:25px;}QPushButton:focus{outline:none;}"):ui->angle_Button->setStyleSheet("QPushButton{background-color: rgb(245,245,220);selection-color : rgb(225,255,255);border-radius:25px;}QPushButton:hover{background-color:rgb(0,128,128)}QPushButton:focus{outline:none;}");
     setMode();
 }
 
@@ -870,7 +917,21 @@ void MainWindow::on_model_button_clicked()
         ISMODEL = false;
         QMessageBox::warning(NULL, "提示", "请重新选择模式", QMessageBox::Yes);
     }
-    ISMODEL == true?ui->model_button->setStyleSheet("background: rgb(0,255,0)"):ui->model_button->setStyleSheet("background: rgb(255,255,255)");
+//    QPushButton{background-color: rgb(245,245,220);selection-color : rgb(225,255,255);border-radius:25px;}QPushButton:hover{background-color:rgb(0,128,128)}QPushButton:focus{outline:none;}
+    ISMODEL == true?ui->model_button->setStyleSheet("QPushButton{background-color: rgb(0,128,128);border-radius:25px;}QPushButton:focus{outline:none;}"):ui->model_button->setStyleSheet("QPushButton{background-color: rgb(245,245,220);selection-color : rgb(225,255,255);border-radius:25px;}QPushButton:hover{background-color:rgb(0,128,128)}QPushButton:focus{outline:none;}");
     ISMODEL == true?ui->model_head->setStyleSheet("QLabel{background-color:rgba(200,101,102,200)}"):ui->model_head->setStyleSheet("QLabel{background-color:rgba(200,101,102,0)}");
     setMode();
+}
+
+void MainWindow::on_generate_button_clicked()
+{
+    QMessageBox::warning(NULL, "提示", "模型采集完毕", QMessageBox::Yes);
+    //展示模型
+    emit(giveMOdelPoint(modelPoints));
+    drawmodelthread->start();
+    clearModeInfo();
+    modelPoints.clear();
+    ISMODEL = false;
+    ui->model_button->setStyleSheet("background: rgb(255,255,255)");
+    NUM = 0;
 }

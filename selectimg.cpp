@@ -18,6 +18,8 @@ SelectImg::SelectImg(QWidget *parent,
     ui->setupUi(this);
     this->sign = sign;
     ui->image->setPixmap(QPixmap::fromImage(img));
+    ui->image->setGeometry(0, 0, img.width(), img.height());
+    this->setGeometry(0, 0, img.width(), img.height());
 }
 SelectImg::~SelectImg()
 {

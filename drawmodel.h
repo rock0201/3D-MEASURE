@@ -15,7 +15,7 @@ using namespace cv;
 
 class DrawModel
 {
-
+    int size;
     Point3d head;
     Point3d chest;
     Point3d leftJoint;
@@ -30,19 +30,36 @@ class DrawModel
 
 public:
     DrawModel(vector<Point3d> &modelPoints){
-        if(modelPoints.size() != 11 )
-            return;
-        head       = modelPoints[0];
-        chest      = modelPoints[1];
-        leftJoint  = modelPoints[2];
-        leftHand   = modelPoints[3];
-        rightJoint = modelPoints[4];
-        rightHand  = modelPoints[5];
-        belly      = modelPoints[6];
-        leftKnee   = modelPoints[7];
-        leftFoot   = modelPoints[8];
-        rightKnee  = modelPoints[9];
-        rightFoot  = modelPoints[10];
+
+        size = modelPoints.size();
+        std::cout<<"modelPoints.size"<<size<<std::endl;
+        switch(modelPoints.size()){
+        case 11:
+            rightFoot  = modelPoints[10];
+        case 10:
+            rightKnee  = modelPoints[9];
+        case 9:
+            leftFoot   = modelPoints[8];
+        case 8:
+            leftKnee   = modelPoints[7];
+        case 7:
+            belly      = modelPoints[6];
+        case 6:
+            rightHand  = modelPoints[5];
+        case 5:
+            rightJoint = modelPoints[4];
+        case 4:
+            leftHand   = modelPoints[3];
+        case 3:
+            leftJoint  = modelPoints[2];
+        case 2:
+            chest      = modelPoints[1];
+        case 1:
+            head       = modelPoints[0];
+        default:
+            break;
+        }
+
     }
 
     ~DrawModel();
@@ -71,58 +88,73 @@ public:
           glColor3f(0.0f, 0.0f, 0.0f);
           glPointSize(10.0f);
           glBegin(GL_POINTS);
-          glVertex3d(head.x, head.y, head.z);
-          glVertex3d(chest.x, chest.y, chest.z);
-          glVertex3d(leftJoint.x, leftJoint.y, leftJoint.z);
-          glVertex3d(leftHand.x, leftHand.y, leftHand.z);
-          glVertex3d(rightJoint.x, rightJoint.y, rightJoint.z);
-          glVertex3d(rightHand.x, rightHand.y, rightHand.z);
-          glVertex3d(belly.x, belly.y, belly.z);
-          glVertex3d(leftKnee.x, leftKnee.y, leftKnee.z);
-          glVertex3d(leftFoot.x, leftFoot.y, leftFoot.z);
-          glVertex3d(rightKnee.x, rightKnee.y, rightKnee.z);
-          glVertex3d(rightFoot.x, rightFoot.y, rightFoot.z);
-
-
-
+          switch(size){
+          case 11:
+              glVertex3d(rightFoot.x, rightFoot.y, rightFoot.z);
+          case 10:
+              glVertex3d(rightKnee.x, rightKnee.y, rightKnee.z);
+          case 9:
+              glVertex3d(leftFoot.x, leftFoot.y, leftFoot.z);
+          case 8:
+              glVertex3d(leftKnee.x, leftKnee.y, leftKnee.z);
+          case 7:
+              glVertex3d(belly.x, belly.y, belly.z);
+          case 6:
+              glVertex3d(rightHand.x, rightHand.y, rightHand.z);
+          case 5:
+              glVertex3d(rightJoint.x, rightJoint.y, rightJoint.z);
+          case 4:
+              glVertex3d(leftHand.x, leftHand.y, leftHand.z);
+          case 3:
+              glVertex3d(leftJoint.x, leftJoint.y, leftJoint.z);
+          case 2:
+              glVertex3d(chest.x, chest.y, chest.z);
+          case 1:
+              glVertex3d(head.x, head.y, head.z);
+          default:
+              break;
+          }
           glEnd();
 
 
 
           glColor3f(0.0, 0.0, 0.0);
           glBegin(GL_LINES);
-          glVertex3d(head.x, head.y, head.z);
-          glVertex3d(chest.x, chest.y, chest.z);
-
-          glVertex3d(chest.x, chest.y, chest.z);
-          glVertex3d(leftJoint.x, leftJoint.y, leftJoint.z);
-
-          glVertex3d(leftJoint.x, leftJoint.y, leftJoint.z);
-          glVertex3d(leftHand.x, leftHand.y, leftHand.z);
-
-          glVertex3d(chest.x, chest.y, chest.z);
-          glVertex3d(rightJoint.x, rightJoint.y, rightJoint.z);
-
-          glVertex3d(rightJoint.x, rightJoint.y, rightJoint.z);
-          glVertex3d(rightHand.x, rightHand.y, rightHand.z);
-
-          glVertex3d(chest.x, chest.y, chest.z);
-          glVertex3d(belly.x, belly.y, belly.z);
-
-          glVertex3d(belly.x, belly.y, belly.z);
-          glVertex3d(leftKnee.x, leftKnee.y, leftKnee.z);
-
-          glVertex3d(leftKnee.x, leftKnee.y, leftKnee.z);
-          glVertex3d(leftFoot.x, leftFoot.y, leftFoot.z);
-
-          glVertex3d(belly.x, belly.y, belly.z);
-          glVertex3d(rightKnee.x, rightKnee.y, rightKnee.z);
-
-          glVertex3d(rightKnee.x, rightKnee.y, rightKnee.z);
-          glVertex3d(rightFoot.x, rightFoot.y, rightFoot.z);
-
-
-
+          switch(size){
+          case 11:
+              glVertex3d(rightKnee.x, rightKnee.y, rightKnee.z);
+              glVertex3d(rightFoot.x, rightFoot.y, rightFoot.z);
+          case 10:
+              glVertex3d(belly.x, belly.y, belly.z);
+              glVertex3d(rightKnee.x, rightKnee.y, rightKnee.z);
+          case 9:
+              glVertex3d(leftKnee.x, leftKnee.y, leftKnee.z);
+              glVertex3d(leftFoot.x, leftFoot.y, leftFoot.z);
+          case 8:
+              glVertex3d(belly.x, belly.y, belly.z);
+              glVertex3d(leftKnee.x, leftKnee.y, leftKnee.z);
+          case 7:
+              glVertex3d(chest.x, chest.y, chest.z);
+              glVertex3d(belly.x, belly.y, belly.z);
+          case 6:
+              glVertex3d(rightJoint.x, rightJoint.y, rightJoint.z);
+              glVertex3d(rightHand.x, rightHand.y, rightHand.z);
+          case 5:
+              glVertex3d(chest.x, chest.y, chest.z);
+              glVertex3d(rightJoint.x, rightJoint.y, rightJoint.z);
+          case 4:
+              glVertex3d(leftJoint.x, leftJoint.y, leftJoint.z);
+              glVertex3d(leftHand.x, leftHand.y, leftHand.z);
+          case 3:
+              glVertex3d(chest.x, chest.y, chest.z);
+              glVertex3d(leftJoint.x, leftJoint.y, leftJoint.z);
+          case 2:
+              glVertex3d(head.x, head.y, head.z);
+              glVertex3d(chest.x, chest.y, chest.z);
+          case 1:
+          default:
+              break;
+          }
           glEnd();
           pangolin::FinishFrame();
           //usleep(5000);   // sleep 5 ms

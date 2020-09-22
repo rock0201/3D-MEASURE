@@ -7,6 +7,7 @@
 #include <QOpenGLWidget>
 #include <QOpenGLFunctions>
 #include <QWidget>
+#include <QMouseEvent>
 #include <opencv2/opencv.hpp>
 #include <vector>
 
@@ -37,12 +38,18 @@ protected:
 
     void resizeGL(int width,int height) Q_DECL_OVERRIDE; //处理窗口大小变化事件的，参数是新状态下的宽和高
 
-    //voidkeyPressEvent(QKeyEvent *e);  //鼠标处理函数
-
+    void mousePressEvent(QMouseEvent *);
+    void mouseMoveEvent(QMouseEvent *);
 protected:
 
     bool fullscreen;  //判断是否全屏的变量
 
+private:
+    float rotVelocity;
+    float modelAngleX;
+    float modelAngleY;
+    float mouseLastX;
+    float mouseLastY;
 };
 
 #endif // GLMODELVIEW

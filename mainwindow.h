@@ -114,7 +114,10 @@ private slots:
     void setMode();
     void setModelInfo(int modelNum);//gen ju nums tishi
     void clearModeInfo();
+    void on_generate_button_clicked();
+
 private:
+    double scale = 1.0;
     Mat backGround;
     Mat imgModel;
     QImage qImgModel;

@@ -5,6 +5,12 @@ GLModelView::GLModelView(std::vector<Point3d> &points, QWidget *parent)
     : QOpenGLWidget(parent),
       modelPoints(points)
 {
+    rotVelocity = 0.5;
+    modelAngleX = 0;
+    modelAngleY = 0;
+
+    mouseLastX = 0;
+    mouseLastY = 0;
 
 }
 
@@ -38,11 +44,15 @@ void GLModelView::paintGL()
     if(!modelPoints.empty()){
         std::cout<<"translate..."<<std::endl;
         glLoadIdentity();
-        glTranslated(-modelPoints[0].x, -modelPoints[0].y + 10, -modelPoints[0].z - 50);
+        glTranslated(-modelPoints[0].x, -modelPoints[0].y, -modelPoints[0].z);
+        glTranslated(0, 0, -100);
+        //glRotatef(modelAngleX, 1, 0 ,0);
+        //glRotatef(modelAngleY, 0, 1, 0);
     }
 
     glPointSize(5.0);
     glBegin(GL_POINTS);
+    glColor3f(0, 1, 0);
     glColor3f(1, 0 ,0);
     //glVertex3d(0, , -10);
     for(int i = 0; i < modelPoints.size(); ++i){
@@ -105,12 +115,32 @@ void GLModelView::resizeGL(int width, int height)
     GLdouble rFov = 90 * 3.14159265 / 180.0;
     glFrustum( -zNear * tan( rFov / 2 ) * ((GLfloat)width/(GLfloat)height),
                zNear * tan( rFov / 2) * ((GLfloat)width/(GLfloat)height),
-               -zNear * tan( rFov / 2),
                zNear * tan( rFov / 2),
+               -zNear * tan( rFov / 2),
                zNear, zFar );
 
     //glOrtho(-width/2,width/2,-height/2,height/2,-1,1);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
+}
+
+void GLModelView::mousePressEvent(QMouseEvent *event)
+{
+    mouseLastX = event->pos().x();
+    mouseLastY = event->pos().y();
+}
+
+void GLModelView::mouseMoveEvent(QMouseEvent *event)
+{
+    float deltaX = event->pos().x() - mouseLastX;
+    float deltaY = event->pos().y() - mouseLastY;
+
+    mouseLastX = event->pos().x();
+    mouseLastY = event->pos().y();
+
+    modelAngleY += deltaX * rotVelocity; // deltaX -> rotation in y-axis
+    modelAngleX += deltaY * rotVelocity; // deltaY -> rotation in x-axis
+
+    update();
 }

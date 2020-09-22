@@ -6,14 +6,13 @@ MyLabel::MyLabel(const QString & text,int sign, QWidget* parent)
     :QLabel(parent)
 {
      this->setText(text);
-    this->sign = sign;
+     this->sign = sign;
      connect(this, SIGNAL(clicked()), this, SLOT(slotClicked()));
 }
 
 void MyLabel::slotClicked()
 {
     SelectImg *selectImg = new SelectImg(0, sign, disImage);
-    selectImg->setGeometry(0, 0, disImage.width(), disImage.height());
 
     connect(selectImg, SIGNAL(giveCor(int, float,float)), this, SLOT (getPoint(int, float,float)));
     selectImg->show();
