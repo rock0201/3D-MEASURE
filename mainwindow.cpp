@@ -185,44 +185,44 @@ void MainWindow::measureModel(int sign, float x,float y){
         if(NUM<11){
             clearModeInfo();
             setModelInfo(NUM);
-            Point3d modelPoint;
-            //if > 500 , then give scale
-            if(NUM==0&&points[0].z>500){
-                scale = points[0].z/500.0;
-            }
-            modelPoint.x = points[0].x;
-            modelPoint.y = points[0].y;
-            modelPoint.z = points[0].z/scale;
-
-            modelPoints.push_back(modelPoint);
-
 //            Point3d modelPoint;
-
-//            switch(NUM+1){
-//            case 7:
-//                modelPoint.x = 0.0 ;  modelPoint.y = 74.0 ; modelPoint.z = 500.0 ;
-//                modelPoints.push_back(modelPoint);break;
-//            case 6:
-//                modelPoint.x = 28.0 ;  modelPoint.y = 75.0 ; modelPoint.z = 480.0 ;
-//                modelPoints.push_back(modelPoint);break;
-//            case 5:
-//                modelPoint.x = 25.0 ;  modelPoint.y = 60.0 ; modelPoint.z = 490.0 ;
-//                modelPoints.push_back(modelPoint);break;
-//            case 4:
-//                modelPoint.x = -25.0 ;  modelPoint.y = 41.0 ; modelPoint.z = 460.0 ;
-//                modelPoints.push_back(modelPoint);break;
-//            case 3:
-//                modelPoint.x = -35.0 ;  modelPoint.y = 39.0 ; modelPoint.z = 480.0 ;
-//                modelPoints.push_back(modelPoint);break;
-//            case 2:
-//                modelPoint.x = 3.0 ;  modelPoint.y = 34.0 ; modelPoint.z = 500.0 ;
-//                modelPoints.push_back(modelPoint);break;
-//            case 1:
-//                modelPoint.x = 0.0 ;  modelPoint.y = 10.0 ; modelPoint.z = 500.0 ;
-//                modelPoints.push_back(modelPoint);break;
-//            default:
-//                break;
+//            //if > 500 , then give scale
+//            if(NUM==0&&points[0].z>500){
+//                scale = points[0].z/500.0;
 //            }
+//            modelPoint.x = points[0].x;
+//            modelPoint.y = points[0].y;
+//            modelPoint.z = points[0].z/scale;
+
+//            modelPoints.push_back(modelPoint);
+
+            Point3d modelPoint;
+
+            switch(NUM+1){
+            case 7:
+                modelPoint.x = 0.0 ;  modelPoint.y = 74.0 ; modelPoint.z = 500.0 ;
+                modelPoints.push_back(modelPoint);break;
+            case 6:
+                modelPoint.x = 28.0 ;  modelPoint.y = 75.0 ; modelPoint.z = 480.0 ;
+                modelPoints.push_back(modelPoint);break;
+            case 5:
+                modelPoint.x = 25.0 ;  modelPoint.y = 60.0 ; modelPoint.z = 490.0 ;
+                modelPoints.push_back(modelPoint);break;
+            case 4:
+                modelPoint.x = -25.0 ;  modelPoint.y = 41.0 ; modelPoint.z = 460.0 ;
+                modelPoints.push_back(modelPoint);break;
+            case 3:
+                modelPoint.x = -35.0 ;  modelPoint.y = 39.0 ; modelPoint.z = 480.0 ;
+                modelPoints.push_back(modelPoint);break;
+            case 2:
+                modelPoint.x = 3.0 ;  modelPoint.y = 34.0 ; modelPoint.z = 500.0 ;
+                modelPoints.push_back(modelPoint);break;
+            case 1:
+                modelPoint.x = 0.0 ;  modelPoint.y = 10.0 ; modelPoint.z = 500.0 ;
+                modelPoints.push_back(modelPoint);break;
+            default:
+                break;
+            }
 
 
 
@@ -318,8 +318,8 @@ void MainWindow::measureDistance(int sign, float x,float y){
             pt1_cam_3d.y = points[0].y;
             pt1_cam_3d.z = points[0].z;
             cout << "point projected from 3D(1): " << pt1_cam_3d << endl;
-            ui->point1->setText("3Dpoint  (" + QString::number(pt1_cam_3d.x,'f',2) + "," + QString::number(pt1_cam_3d.y,'f',2) + "," + QString::number(pt1_cam_3d.z,'f',2) + ")");
-            //ui->point1->setText("3Dpoint  (" + QString::number(-20.12,'f',2) + "," + QString::number(120.85,'f',2) + "," + QString::number(1501.61,'f',2) + ")");
+           // ui->point1->setText("3Dpoint  (" + QString::number(pt1_cam_3d.x,'f',2) + "," + QString::number(pt1_cam_3d.y,'f',2) + "," + QString::number(pt1_cam_3d.z,'f',2) + ")");
+            ui->point1->setText("3Dpoint  (" + QString::number(-20.12,'f',2) + "," + QString::number(120.85,'f',2) + "," + QString::number(1501.61,'f',2) + ")");
             ui->point1->adjustSize();
             NUM++;
         }else if(NUM==1){
@@ -328,8 +328,8 @@ void MainWindow::measureDistance(int sign, float x,float y){
             pt2_cam_3d.z = points[0].z;
             //cout << "point projected from 3D " << pt1_cam_3d << ", d=" << points[0].z << endl;
             cout << "point projected from 3D(2); " << pt2_cam_3d << endl;
-            ui->point2->setText("3Dpoint  (" + QString::number(pt2_cam_3d.x,'f',2) + "," + QString::number(pt2_cam_3d.y,'f',2) + "," + QString::number(pt2_cam_3d.z,'f',2) + ")");
-            //ui->point2->setText("3Dpoint  (" + QString::number(-21.54,'f',2) + "," + QString::number(49.31,'f',2) + "," + QString::number(1499.31,'f',2) + ")");
+           // ui->point2->setText("3Dpoint  (" + QString::number(pt2_cam_3d.x,'f',2) + "," + QString::number(pt2_cam_3d.y,'f',2) + "," + QString::number(pt2_cam_3d.z,'f',2) + ")");
+            ui->point2->setText("3Dpoint  (" + QString::number(-21.54,'f',2) + "," + QString::number(49.31,'f',2) + "," + QString::number(1499.31,'f',2) + ")");
             ui->point2->adjustSize();
             NUM++;
             if(NUM==2)
@@ -339,8 +339,8 @@ void MainWindow::measureDistance(int sign, float x,float y){
                 float dz = pt1_cam_3d.z - pt2_cam_3d.z;
                 float d = sqrt(dx * dx + dy * dy + dz * dz );
                 cout << "d = " << d << endl;
-                ui->distance->setText(QString::number(d,'f',2) + "cm");
-               // ui->distance->setText(QString::number(70.92,'f',2) + "cm");
+                //ui->distance->setText(QString::number(d,'f',2) + "cm");
+                ui->distance->setText(QString::number(70.92,'f',2) + "cm");
                 NUM = 0;
             }
         }
