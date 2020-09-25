@@ -24,7 +24,9 @@ SOURCES += \
     selectimg.cpp \
     mylabel.cpp \
     drawmodelthread.cpp \
-    glmodelview.cpp
+    glmodelview.cpp \
+    character.cpp \
+    glad.c
 
 HEADERS += \
     mainwindow.h \
@@ -34,7 +36,9 @@ HEADERS += \
     mylabel.h \
     drawmodel.h \
     drawmodelthread.h \
-    glmodelview.h
+    glmodelview.h \
+    camera.h \
+    character.h
 
 FORMS += \
     mainwindow.ui \
@@ -44,7 +48,8 @@ FORMS += \
 
 TRANSLATIONS += \
     measure1_zh_CN.ts
-INCLUDEPATH += /usr/local/include \
+INCLUDEPATH += /usr/include/glm \
+               /usr/local/include \
                /usr/local/include/opencv \
                /usr/local/include/opencv2 \
                /home/rock/slamcode/SungemSDK-Cpp-master \
@@ -52,7 +57,9 @@ INCLUDEPATH += /usr/local/include \
                /home/rock/slamcode/SungemSDK-Cpp-master/SungemSDK/include \
                /home/rock/Pangolin/include \
                /usr/local/include/eigen3 \
-              /home/rock/slamcode/SungemSDK-Cpp-master/libhs_highapi/include
+               /home/rock/slamcode/SungemSDK-Cpp-master/libhs_highapi/include \
+               /usr/local/freetype/include \
+               /usr/local/freetype/include/freetype2
 
 LIBS += /usr/local/lib/libopencv_calib3d.so \
 /usr/local/lib/libopencv_core.so \
@@ -69,7 +76,9 @@ LIBS += /usr/local/lib/libopencv_calib3d.so \
 /usr/local/lib/libopencv_superres.so \
 /usr/local/lib/libopencv_videoio.so \
 /usr/local/lib/libopencv_video.so \
-/usr/local/lib/libopencv_videostab.so
+/usr/local/lib/libopencv_videostab.so \
+/usr/local/freetype/lib/libfreetype.so \
+-ldl -lfreetype
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -94,4 +103,10 @@ RESOURCES += \
     lable.qrc
 
 DISTFILES += \
-    2020-09-17 10-12-09屏幕截图.png
+    2020-09-17 10-12-09屏幕截图.png \
+    character.frag \
+    character.vert \
+    joint.frag \
+    joint.vert \
+    model.frag \
+    model.vert

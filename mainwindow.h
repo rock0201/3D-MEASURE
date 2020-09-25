@@ -1,5 +1,11 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
+
+#include "selectimg.h"
+#include "mylabel.h"
+#include "drawmodel.h"
+#include "glmodelview.h"
+
 #include<drawmodelthread.h>
 #include <thread>
 #include <QMainWindow>
@@ -35,10 +41,7 @@
 #include<opencv2/imgproc/types_c.h>
 #include <recalibrate.h>
 #include <photo.h>
-#include "selectimg.h"
-#include "mylabel.h"
-#include "drawmodel.h"
-#include "glmodelview.h"
+
 #include <vector>
 using namespace std;
 using namespace cv;
@@ -57,7 +60,7 @@ public:
 
     MyLabel *label_L;
     MyLabel *label_R;
-    DrawmodelThread* drawmodelthread;
+    //DrawmodelThread* drawmodelthread;
 
     GLModelView *modelView;
     Point2d pixel2cam (const Point& p,const Mat& K );

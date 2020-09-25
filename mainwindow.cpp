@@ -53,13 +53,13 @@ MainWindow::MainWindow(QWidget *parent)
     ui->imgLayout->addWidget(label_R);
     ui->imgLayout->addStretch();
     connect(label_R, SIGNAL(getCor(int,float,float)), this, SLOT(getPoint (int ,float, float)));
-    drawmodelthread = new DrawmodelThread(this);
-    connect(drawmodelthread,SIGNAL(isDone()),this,SLOT(deelThreadover()));
-    connect(this,SIGNAL(giveMOdelPoint(vector<Point3d>)),drawmodelthread,SLOT(getPoints(vector<Point3d>)));
+    //drawmodelthread = new DrawmodelThread(this);
+    //connect(drawmodelthread,SIGNAL(isDone()),this,SLOT(deelThreadover()));
+    //connect(this,SIGNAL(giveMOdelPoint(vector<Point3d>)),drawmodelthread,SLOT(getPoints(vector<Point3d>)));
 
 
     // 模型视口
-    modelView = new GLModelView(modelPoints, this);
+    modelView = new GLModelView(this);
     modelView->setGeometry(300, 720, 640, 360);
 
 
@@ -143,7 +143,7 @@ void MainWindow::setMode(){//设置正确的mode
 
 void MainWindow::deelThreadover(){
    // drawmodelthread->quit();
-    drawmodelthread->terminate();
+    //drawmodelthread->terminate();
 }
 
 void MainWindow::getPoint(int sign, float x,float y){
@@ -185,18 +185,26 @@ void MainWindow::measureModel(int sign, float x,float y){
         if(NUM<11){
             clearModeInfo();
             setModelInfo(NUM);
-//            Point3d modelPoint;
-//            //if > 500 , then give scale
-//            if(NUM==0&&points[0].z>500){
-//                scale = points[0].z/500.0;
-//            }
-//            modelPoint.x = points[0].x;
-//            modelPoint.y = points[0].y;
-//            modelPoint.z = points[0].z/scale;
-
-//            modelPoints.push_back(modelPoint);
-
             Point3d modelPoint;
+            //if > 500 , then give scale
+            /*if(NUM==0&&points[0].z>500){
+                scale = points[0].z/500.0;
+            }*/
+            modelPoint.x = points[0].x;
+            modelPoint.y = points[0].y;
+            modelPoint.z = points[0].z;
+
+            modelPoints.push_back(modelPoint);
+
+            std::vector<float> vertices;
+            for(int i = 0; i < modelPoints.size(); ++i){
+                vertices.push_back(modelPoints[i].x);
+                vertices.push_back(-modelPoints[i].y);
+                vertices.push_back(modelPoints[i].z);
+            }
+            modelView->updateVertices(vertices);
+            vertices.clear();
+            /*Point3d modelPoint;
 
             switch(NUM+1){
             case 7:
@@ -222,7 +230,7 @@ void MainWindow::measureModel(int sign, float x,float y){
                 modelPoints.push_back(modelPoint);break;
             default:
                 break;
-            }
+            }*/
 
 
 
@@ -237,7 +245,7 @@ void MainWindow::measureModel(int sign, float x,float y){
             QMessageBox::warning(NULL, "提示", "模型采集完毕", QMessageBox::Yes);
             //展示模型
             emit(giveMOdelPoint(modelPoints));
-            drawmodelthread->start();
+            //drawmodelthread->start();
             //(new DrawModel(modelPoints))->draw();
 //            DrawModel* drawModel = new DrawModel(modelPoints);
 //            modelView = thread(&DrawModel::draw,drawModel);
@@ -549,9 +557,10 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event)
 }
 void MainWindow::on_select_clicked()
 {
-    fileName = QFileDialog::getExistingDirectory ( this, tr("Open Image"), ".",QFileDialog::ShowDirsOnly);
-    QTextCodec *code = QTextCodec::codecForName("UTF-8");//解决中文路径问题
-    fname = code->fromUnicode(fileName).data();
+//    fileName = QFileDialog::getExistingDirectory ( this, tr("Open Image"), ".",QFileDialog::ShowDirsOnly);
+//    QTextCodec *code = QTextCodec::codecForName("UTF-8");//解决中文路径问题
+//    fname = code->fromUnicode(fileName).data();
+    fname = "/home/rock/stereo-calibration-master/calib_imgs/result8";
     newSize.width = imageSize.width;
     newSize.height = imageSize.height;
     cv::stereoRectify(cameraMatrixL, distCoeffL, cameraMatrixR, distCoeffR, imageSize, R, T, Rl, Rr, Pl, Pr, Q,
@@ -619,15 +628,16 @@ void MainWindow::on_select_clicked()
 
 void MainWindow::on_calibrate_clicked()
 {
-    calibrateName = QFileDialog::getOpenFileName(this,tr("Open"),".",tr("Image File(*.yml)"));
+//    calibrateName = QFileDialog::getOpenFileName(this,tr("Open"),".",tr("Image File(*.yml)"));
 
-    QTextCodec *code = QTextCodec::codecForName("UTF-8");//解决中文路径问题
-    caliname = code->fromUnicode(calibrateName).data();
-    if (calibrateName.isEmpty())
-    {
-        return;
-    }
+//    QTextCodec *code = QTextCodec::codecForName("UTF-8");//解决中文路径问题
+//    caliname = code->fromUnicode(calibrateName).data();
+//    if (calibrateName.isEmpty())
+//    {
+//        return;
+//    }
 
+    caliname = "/home/rock/20200909/cail/9.yml";
     cameraMatrixL = (Mat_<double>(3, 3) << 0, 0, 0, 0, 0, 0, 0, 0, 0);
     distCoeffL = (cv::Mat_<double>(5, 1) << 0, 0, 0, 0, 0);
     cameraMatrixR = (Mat_<double>(3, 3) << 0, 0, 0, 0, 0, 0, 0, 0, 0);
@@ -928,7 +938,7 @@ void MainWindow::on_generate_button_clicked()
     QMessageBox::warning(NULL, "提示", "模型采集完毕", QMessageBox::Yes);
     //展示模型
     emit(giveMOdelPoint(modelPoints));
-    drawmodelthread->start();
+    //drawmodelthread->start();
     clearModeInfo();
     modelPoints.clear();
     ISMODEL = false;
