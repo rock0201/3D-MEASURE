@@ -22,7 +22,7 @@
 #include <QFontDialog>
 #include <opencv/highgui.h>
 #include <opencv2/highgui/highgui_c.h>
-
+#include "beginwindow.h"
 #include <opencv2/core.hpp>
 #include <opencv2/imgproc.hpp>
 #include <opencv2/highgui.hpp>
@@ -64,15 +64,19 @@ public:
 
     GLModelView *modelView;
     Point2d pixel2cam (const Point& p,const Mat& K );
+    void closeEvent(QCloseEvent *);
 signals:
     void giveMOdelPoint(vector<Point3d> modelPoints);
+    void goBeginWindow();
 public slots:
     void getPoint(int sign, float x,float y);
-
+    void getBeginwindow(string cName,string iName);
 private slots:
+    void select_clicked();
+    void calibrate_clicked();
     void deelThreadover();
-    void on_select_clicked();
-    void on_calibrate_clicked();
+   // void on_select_clicked();
+    //void on_calibrate_clicked();
     QImage  Mat2QImage(cv::Mat cvImg);
     void mousePressEvent(QMouseEvent *event);
     void mouseMoveEvent(QMouseEvent *event);

@@ -26,7 +26,8 @@ SOURCES += \
     drawmodelthread.cpp \
     glmodelview.cpp \
     character.cpp \
-    glad.c
+    glad.c \
+    beginwindow.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -38,13 +39,15 @@ HEADERS += \
     drawmodelthread.h \
     glmodelview.h \
     camera.h \
-    character.h
+    character.h \
+    beginwindow.h
 
 FORMS += \
     mainwindow.ui \
     photo.ui \
     recalibrate.ui \
-    selectimg.ui
+    selectimg.ui \
+    beginwindow.ui
 
 TRANSLATIONS += \
     measure1_zh_CN.ts

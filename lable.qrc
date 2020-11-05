@@ -1,3 +1,10 @@
 <RCC>
     <qresource prefix="/new/prefix1"/>
+    <qresource prefix="/">
+        <file>lable/img.png</file>
+        <file>lable/begin.png</file>
+        <file>lable/photo.png</file>
+        <file>lable/cail.png</file>
+        <file>lable/angle.png</file>
+    </qresource>
 </RCC>

@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>beginWindow</class>
+ <widget class="QMainWindow" name="beginWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>792</width>
+    <height>527</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(105,105,105);
+QFileDialog {
+    background-color:red;
+}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPushButton" name="pushButton_3">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>20</y>
+      <width>300</width>
+      <height>150</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>25</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+  background-color: rgb(245,245,220);
+  selection-color : rgb(225,255,255);
+   border-radius:25px;
+}
+ 
+QPushButton:hover{
+   background-color:rgb(0,128,128)
+}
+QPushButton:focus{
+   outline:none;
+}</string>
+    </property>
+    <property name="text">
+     <string> 拍照</string>
+    </property>
+    <property name="icon">
+     <iconset resource="lable.qrc">
+      <normaloff>:/lable/photo.png</normaloff>:/lable/photo.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>40</width>
+      <height>40</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_5">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>20</y>
+      <width>300</width>
+      <height>150</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>25</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+  background-color: rgb(245,245,220);
+  selection-color : rgb(225,255,255);
+   border-radius:25px;
+}
+ 
+QPushButton:hover{
+   background-color:rgb(0,128,128)
+}
+QPushButton:focus{
+   outline:none;
+}</string>
+    </property>
+    <property name="text">
+     <string> 标定</string>
+    </property>
+    <property name="icon">
+     <iconset resource="lable.qrc">
+      <normaloff>:/lable/angle.png</normaloff>:/lable/angle.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>40</width>
+      <height>40</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="cail_button">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>190</y>
+      <width>300</width>
+      <height>150</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>25</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+  background-color: rgb(245,245,220);
+  selection-color : rgb(225,255,255);
+   border-radius:25px;
+}
+ 
+QPushButton:hover{
+   background-color:rgb(0,128,128)
+}
+QPushButton:focus{
+   outline:none;
+}</string>
+    </property>
+    <property name="text">
+     <string> 选择标定文件</string>
+    </property>
+    <property name="icon">
+     <iconset resource="lable.qrc">
+      <normaloff>:/lable/cail.png</normaloff>:/lable/cail.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>40</width>
+      <height>40</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="img_button">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>190</y>
+      <width>300</width>
+      <height>150</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>25</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+  background-color: rgb(245,245,220);
+  selection-color : rgb(225,255,255);
+   border-radius:25px;
+}
+ 
+QPushButton:hover{
+   background-color:rgb(0,128,128)
+}
+QPushButton:focus{
+   outline:none;
+}</string>
+    </property>
+    <property name="text">
+     <string> 选择图片</string>
+    </property>
+    <property name="icon">
+     <iconset resource="lable.qrc">
+      <normaloff>:/lable/img.png</normaloff>:/lable/img.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>40</width>
+      <height>40</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>370</y>
+      <width>671</width>
+      <height>100</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>25</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+  background-color: rgb(245,245,220);
+  selection-color : rgb(225,255,255);
+   border-radius:25px;
+}
+ 
+QPushButton:hover{
+   background-color:rgb(0,128,128)
+}
+QPushButton:focus{
+   outline:none;
+}</string>
+    </property>
+    <property name="text">
+     <string> 开始</string>
+    </property>
+    <property name="icon">
+     <iconset resource="lable.qrc">
+      <normaloff>:/lable/begin.png</normaloff>:/lable/begin.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>40</width>
+      <height>40</height>
+     </size>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>792</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu3D_MEASURE">
+    <property name="title">
+     <string>3D MEASURE</string>
+    </property>
+   </widget>
+   <addaction name="menu3D_MEASURE"/>
+  </widget>
+ </widget>
+ <resources>
+  <include location="lable.qrc"/>
+ </resources>
+ <connections/>
+</ui>

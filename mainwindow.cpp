@@ -25,10 +25,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->next->setIcon(QIcon("../lable/right.png"));
     ui->last->setIcon(QIcon("../lable/left.png"));
-    ui->photo->setIcon(QIcon("../lable/photo.png"));
-    ui->recalibrate->setIcon(QIcon("../lable/cail.png"));
-    ui->calibrate->setIcon(QIcon("../lable/cailse.png"));
-    ui->select->setIcon(QIcon("../lable/img.png"));
+    //ui->photo->setIcon(QIcon("../lable/photo.png"));
+    //ui->recalibrate->setIcon(QIcon("../lable/cail.png"));
+    //ui->calibrate->setIcon(QIcon("../lable/cailse.png"));
+    //ui->select->setIcon(QIcon("../lable/img.png"));
     ui->angle_Button->setIcon(QIcon("../lable/angle.png"));
     ui->model_button->setIcon(QIcon("../lable/mod.png"));
     ui->generate_button->setIcon(QIcon("../lable/generate.png"));
@@ -62,13 +62,22 @@ MainWindow::MainWindow(QWidget *parent)
     modelView = new GLModelView(this);
     modelView->setGeometry(300, 720, 640, 360);
 
+//    select_clicked();
+//    calibrate_clicked();
 
 
+
+}
+void MainWindow::closeEvent(QCloseEvent *){
+    cout<<"mian destroy"<<endl;
+    emit goBeginWindow();
 
 }
 
 MainWindow::~MainWindow()
 {
+    cout<<"mian destroy"<<endl;
+    emit goBeginWindow();
     delete ui;
 }
 void MainWindow::setModelInfo(int modelNum){
@@ -144,6 +153,17 @@ void MainWindow::setMode(){//设置正确的mode
 void MainWindow::deelThreadover(){
    // drawmodelthread->quit();
     //drawmodelthread->terminate();
+}
+void MainWindow::getBeginwindow(string cName,string iName){
+
+    fname = iName;
+    caliname = cName;
+    this->show();
+    calibrate_clicked();
+    select_clicked();
+
+    cout<<this<<" "<<"beginwindow"<<endl;
+
 }
 
 void MainWindow::getPoint(int sign, float x,float y){
@@ -326,8 +346,8 @@ void MainWindow::measureDistance(int sign, float x,float y){
             pt1_cam_3d.y = points[0].y;
             pt1_cam_3d.z = points[0].z;
             cout << "point projected from 3D(1): " << pt1_cam_3d << endl;
-           // ui->point1->setText("3Dpoint  (" + QString::number(pt1_cam_3d.x,'f',2) + "," + QString::number(pt1_cam_3d.y,'f',2) + "," + QString::number(pt1_cam_3d.z,'f',2) + ")");
-            ui->point1->setText("3Dpoint  (" + QString::number(-20.12,'f',2) + "," + QString::number(120.85,'f',2) + "," + QString::number(1501.61,'f',2) + ")");
+            ui->point1->setText("3Dpoint  (" + QString::number(pt1_cam_3d.x,'f',2) + "," + QString::number(pt1_cam_3d.y,'f',2) + "," + QString::number(pt1_cam_3d.z,'f',2) + ")");
+            //ui->point1->setText("3Dpoint  (" + QString::number(-20.12,'f',2) + "," + QString::number(120.85,'f',2) + "," + QString::number(1501.61,'f',2) + ")");
             ui->point1->adjustSize();
             NUM++;
         }else if(NUM==1){
@@ -336,8 +356,8 @@ void MainWindow::measureDistance(int sign, float x,float y){
             pt2_cam_3d.z = points[0].z;
             //cout << "point projected from 3D " << pt1_cam_3d << ", d=" << points[0].z << endl;
             cout << "point projected from 3D(2); " << pt2_cam_3d << endl;
-           // ui->point2->setText("3Dpoint  (" + QString::number(pt2_cam_3d.x,'f',2) + "," + QString::number(pt2_cam_3d.y,'f',2) + "," + QString::number(pt2_cam_3d.z,'f',2) + ")");
-            ui->point2->setText("3Dpoint  (" + QString::number(-21.54,'f',2) + "," + QString::number(49.31,'f',2) + "," + QString::number(1499.31,'f',2) + ")");
+            ui->point2->setText("3Dpoint  (" + QString::number(pt2_cam_3d.x,'f',2) + "," + QString::number(pt2_cam_3d.y,'f',2) + "," + QString::number(pt2_cam_3d.z,'f',2) + ")");
+            //ui->point2->setText("3Dpoint  (" + QString::number(-21.54,'f',2) + "," + QString::number(49.31,'f',2) + "," + QString::number(1499.31,'f',2) + ")");
             ui->point2->adjustSize();
             NUM++;
             if(NUM==2)
@@ -347,8 +367,8 @@ void MainWindow::measureDistance(int sign, float x,float y){
                 float dz = pt1_cam_3d.z - pt2_cam_3d.z;
                 float d = sqrt(dx * dx + dy * dy + dz * dz );
                 cout << "d = " << d << endl;
-                //ui->distance->setText(QString::number(d,'f',2) + "cm");
-                ui->distance->setText(QString::number(70.92,'f',2) + "cm");
+                ui->distance->setText(QString::number(d,'f',2) + "cm");
+                //ui->distance->setText(QString::number(70.92,'f',2) + "cm");
                 NUM = 0;
             }
         }
@@ -555,12 +575,77 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event)
     //emit sendMessageSignal(sendMsg);
 
 }
-void MainWindow::on_select_clicked()
-{
-//    fileName = QFileDialog::getExistingDirectory ( this, tr("Open Image"), ".",QFileDialog::ShowDirsOnly);
-//    QTextCodec *code = QTextCodec::codecForName("UTF-8");//解决中文路径问题
-//    fname = code->fromUnicode(fileName).data();
-    fname = "/home/rock/stereo-calibration-master/calib_imgs/result8";
+//void MainWindow::on_select_clicked()
+//{
+////    fileName = QFileDialog::getExistingDirectory ( this, tr("Open Image"), ".",QFileDialog::ShowDirsOnly);
+////    QTextCodec *code = QTextCodec::codecForName("UTF-8");//解决中文路径问题
+////    fname = code->fromUnicode(fileName).data();
+//   // fname = "/home/rock/stereo-calibration-master/calib_imgs/result8";
+//    newSize.width = imageSize.width;
+//    newSize.height = imageSize.height;
+//    cv::stereoRectify(cameraMatrixL, distCoeffL, cameraMatrixR, distCoeffR, imageSize, R, T, Rl, Rr, Pl, Pr, Q,
+//            cv::CALIB_ZERO_DISPARITY, 0, newSize, &validROIL, &validROIR);
+//    cv::initUndistortRectifyMap(cameraMatrixL, distCoeffL, Rl, Pl, newSize,
+//        CV_32FC1, mapLx, mapLy);
+//    cv::initUndistortRectifyMap(cameraMatrixR, distCoeffR, Rr, Pr, newSize,
+//        CV_32FC1, mapRx, mapRy);
+//    std::cout << "---------------cameraMatrixL & distCoeffL ----------------- " << std::endl;
+//    std::cout << "cameraMatrixL" << std::endl << cameraMatrixL << std::endl;
+//    std::cout << "distCoeffL" << std::endl << distCoeffL << std::endl;
+
+//    std::cout << "---------------cameraMatrixR & distCoeffR ----------------- " << std::endl;
+//    std::cout << "cameraMatrixR" << std::endl << cameraMatrixR << std::endl;
+//    std::cout << "distCoeffR  " << std::endl << distCoeffR << std::endl;
+
+//    std::cout << "---------------R & T ----------------- " << std::endl;
+//    std::cout << "R " << std::endl << R << std::endl;
+//    std::cout << "T " << std::endl << T << std::endl;
+
+//    std::cout << "---------------Pl & Pr ----------------- " << std::endl;
+//    std::cout << "Pl " << std::endl << Pl << std::endl;
+//    std::cout << "Pr " << std::endl << Pr << std::endl;
+
+//    std::cout << "---------------Rl & Rr ----------------- " << std::endl;
+//    std::cout << "Rl " << std::endl << Rl << std::endl;
+//    std::cout << "Rr " << std::endl << Rr << std::endl;
+
+//    std::cout << "---------------  Q ----------------- " << std::endl;
+//    std::cout << "Q " << std::endl << Q << std::endl;
+
+//    imageL = cv::imread( fname + "/left" + (QString::number(imgNum)).toStdString() + ".jpg");
+//    imageR = cv::imread( fname + "/right" +(QString::number(imgNum)).toStdString() + ".jpg");
+
+//    //std::cout<<imageL.cols<<" "<<imageL.rows<<std::endl;
+
+//    cv::Mat rectifyImageL, rectifyImageR;
+
+//    cv::remap(imageL, rectifyImageL, mapLx, mapLy, cv::INTER_LINEAR);
+//    cv::remap(imageR, rectifyImageR, mapRx, mapRy, cv::INTER_LINEAR);
+
+//    cv::resize(imageL, displayImgL,displaySize);
+//    cv::resize(imageR, displayImgR,displaySize);
+//    QImage disImage1=Mat2QImage(displayImgL);
+//    QImage disImage2=Mat2QImage(displayImgR);
+
+
+//    label_L->disImage = Mat2QImage(imageL);//传入原图进行点击
+//    label_L->setPixmap(QPixmap::fromImage(disImage1));
+
+//    label_R->disImage = Mat2QImage(imageR);
+
+//    label_R->setPixmap(QPixmap::fromImage(disImage2));
+
+//    if(!ISCAIL){
+//        QMessageBox::warning(NULL, "提示", "请选择标定文件！", QMessageBox::Yes);
+//    }
+//    allClear();
+
+
+
+
+
+//}
+void MainWindow::select_clicked(){
     newSize.width = imageSize.width;
     newSize.height = imageSize.height;
     cv::stereoRectify(cameraMatrixL, distCoeffL, cameraMatrixR, distCoeffR, imageSize, R, T, Rl, Rr, Pl, Pr, Q,
@@ -619,25 +704,8 @@ void MainWindow::on_select_clicked()
         QMessageBox::warning(NULL, "提示", "请选择标定文件！", QMessageBox::Yes);
     }
     allClear();
-
-
-
-
-
 }
-
-void MainWindow::on_calibrate_clicked()
-{
-//    calibrateName = QFileDialog::getOpenFileName(this,tr("Open"),".",tr("Image File(*.yml)"));
-
-//    QTextCodec *code = QTextCodec::codecForName("UTF-8");//解决中文路径问题
-//    caliname = code->fromUnicode(calibrateName).data();
-//    if (calibrateName.isEmpty())
-//    {
-//        return;
-//    }
-
-    caliname = "/home/rock/20200909/cail/9.yml";
+void MainWindow::calibrate_clicked(){
     cameraMatrixL = (Mat_<double>(3, 3) << 0, 0, 0, 0, 0, 0, 0, 0, 0);
     distCoeffL = (cv::Mat_<double>(5, 1) << 0, 0, 0, 0, 0);
     cameraMatrixR = (Mat_<double>(3, 3) << 0, 0, 0, 0, 0, 0, 0, 0, 0);
@@ -646,10 +714,7 @@ void MainWindow::on_calibrate_clicked()
     T = (cv::Mat_<double>(3, 1) << 0, 0, 0);
     E = (Mat_<double>(3, 3) << 0, 0, 0, 0, 0, 0, 0, 0, 0);
     F = (Mat_<double>(3, 3) << 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    double a[3][3];
-    double b[5][1];
-    char c;
-    string str;
+
     //cameraMatrixL = (Mat_<double>(3, 3) << a[0][0], 0, 0, 0, 0, 0, 0, 0, 0);
     FileStorage fs(caliname, FileStorage::READ);
     fs["imageSize"] >> imageSize;
@@ -678,6 +743,59 @@ void MainWindow::on_calibrate_clicked()
     allClear();
 
 }
+
+//void MainWindow::on_calibrate_clicked()
+//{
+////    calibrateName = QFileDialog::getOpenFileName(this,tr("Open"),".",tr("Image File(*.yml)"));
+
+////    QTextCodec *code = QTextCodec::codecForName("UTF-8");//解决中文路径问题
+////    caliname = code->fromUnicode(calibrateName).data();
+////    if (calibrateName.isEmpty())
+////    {
+////        return;
+////    }
+
+//   // caliname = "/home/rock/20200909/cail/9.yml";
+//    cameraMatrixL = (Mat_<double>(3, 3) << 0, 0, 0, 0, 0, 0, 0, 0, 0);
+//    distCoeffL = (cv::Mat_<double>(5, 1) << 0, 0, 0, 0, 0);
+//    cameraMatrixR = (Mat_<double>(3, 3) << 0, 0, 0, 0, 0, 0, 0, 0, 0);
+//    distCoeffR = (cv::Mat_<double>(5, 1) << 0, 0, 0, 0, 0);
+//    R = (Mat_<double>(3, 3) << 0, 0, 0, 0, 0, 0, 0, 0, 0);
+//    T = (cv::Mat_<double>(3, 1) << 0, 0, 0);
+//    E = (Mat_<double>(3, 3) << 0, 0, 0, 0, 0, 0, 0, 0, 0);
+//    F = (Mat_<double>(3, 3) << 0, 0, 0, 0, 0, 0, 0, 0, 0);
+//    double a[3][3];
+//    double b[5][1];
+//    char c;
+//    string str;
+//    //cameraMatrixL = (Mat_<double>(3, 3) << a[0][0], 0, 0, 0, 0, 0, 0, 0, 0);
+//    FileStorage fs(caliname, FileStorage::READ);
+//    fs["imageSize"] >> imageSize;
+//    fs["cameraMatrixL"] >> cameraMatrixL;
+//    fs["distCoeffL"] >> distCoeffL;
+//    fs["cameraMatrixR"] >> cameraMatrixR;
+//    fs["distCoeffR"] >> distCoeffR;
+//    fs["R"] >> R;
+//    fs["T"] >> T;
+//    fs["E"] >> E;
+//    fs["F"] >> F;
+//    fs.release();
+//    if (!readSuccess()) {
+//        cout << "标定文件错误！" << endl;
+//    }
+//    cout << "imageSize" << imageSize << endl;
+//    cout << "cameraMatrixL" << cameraMatrixL << endl;
+//    cout << "distCoeffL" << distCoeffL << endl;
+//    cout << "cameraMatrixR" << cameraMatrixR << endl;
+//    cout << "distCoeffR" << distCoeffR << endl;
+//    cout << "R" << R << endl;
+//    cout << "T" << T << endl;
+//    cout << "E" << E << endl;
+//    cout << "F" << F << endl;
+//    ISCAIL = true;
+//    allClear();
+
+//}
 QImage  MainWindow::Mat2QImage(cv::Mat cvImg)
 {
     QImage qImg;
@@ -784,6 +902,7 @@ void MainWindow::on_last_clicked()
 
 void MainWindow::on_next_clicked()
 {
+
     string ffname =fname + "/left" + (QString::number(imgNum+1)).toStdString() + ".jpg";
     Mat imagee = imread(ffname);
     if(!imagee.data)
@@ -880,6 +999,10 @@ void MainWindow::clearPoint()//  reset all mode
     scale = 1.0;
     setMode();
     clearModeInfo();
+    modelPoints.clear();
+    std::vector<float> vertices;
+   // vertices.push_back(0);vertices.push_back(0);vertices.push_back(0);
+    modelView->updateVertices(vertices);
 
 }
 void MainWindow::allClear()

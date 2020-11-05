@@ -218,6 +218,7 @@ void GLModelView::wheelEvent(QWheelEvent *event)
 void GLModelView::updateVertices(std::vector<float> &vert)
 {
     //vertices.clear();
+    if(vert.size() == 0) return;
     vertices = vert;
     if(vert.size() == 3){
         model.translate(-vert[0], -vert[1] + 3, -vert[2]);
